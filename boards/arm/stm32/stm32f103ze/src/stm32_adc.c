@@ -78,14 +78,14 @@
 #ifdef CONFIG_STM32_ADC1
 static const uint8_t  g_chanlist[ADC1_NCHANNELS] =
 {
-  14
+  0
 };
 
 /* Configurations of pins used byte each ADC channels */
 
 static const uint32_t g_pinlist[ADC1_NCHANNELS]  =
 {
-  GPIO_ADC1_IN14
+  GPIO_ADC1_IN0
 };
 #endif
 

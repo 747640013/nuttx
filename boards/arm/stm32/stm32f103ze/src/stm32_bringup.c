@@ -279,6 +279,7 @@ int stm32_bringup(void)
     {
       syslog(LOG_ERR, "ERROR: stm32_adc_setup failed: %d\n", ret);
     }
+   syslog(LOG_INFO,"Successfully bound ADC 0 to the ADC driver\n");
 #endif
 
 #ifdef CONFIG_STM32_CAN_CHARDRIVER
