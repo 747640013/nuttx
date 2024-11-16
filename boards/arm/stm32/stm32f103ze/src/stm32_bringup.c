@@ -64,7 +64,7 @@
 
 /* PORT and SLOT number probably depend on the board configuration */
 
-#ifdef CONFIG_ARCH_BOARD_STM3210E_EVAL
+#ifdef CONFIG_ARCH_BOARD_STM32F103ZE
 #  define NSH_HAVEUSBDEV 1
 #  define NSH_HAVEMMCSD  1
 #  if defined(CONFIG_NSH_MMCSDSLOTNO) && CONFIG_NSH_MMCSDSLOTNO != 0

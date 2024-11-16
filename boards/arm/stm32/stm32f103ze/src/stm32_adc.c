@@ -32,7 +32,7 @@
 #include <nuttx/board.h>
 #include <nuttx/analog/adc.h>
 #include <arch/board/board.h>
-
+#include "stm32_adc.h" 
 #include "chip.h"
 #include "arm_internal.h"
 #include "stm32_pwm.h"
