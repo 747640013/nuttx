@@ -2535,6 +2535,17 @@ config ARCH_BOARD_STM3210E_EVAL
 		microcontroller (ARM Cortex-M3).  This port uses the GNU Cortex-M3
 		toolchain.
 
+config ARCH_BOARD_STM32F103ZE
+	bool "STMicro STM32F103ZE development board"
+	depends on ARCH_CHIP_STM32F103ZE
+	select ARCH_HAVE_LEDS
+	select ARCH_HAVE_BUTTONS
+	select ARCH_HAVE_IRQBUTTONS
+	---help---
+		STMicro STM32F103ZE development board based on the STMicro STM32F103ZET6
+		microcontroller (ARM Cortex-M3).  This port uses the GNU Cortex-M3
+		toolchain.
+
 config ARCH_BOARD_STM3220G_EVAL
 	bool "STMicro STM3220G-EVAL development board"
 	depends on ARCH_CHIP_STM32F207IG
@@ -3518,6 +3529,7 @@ config ARCH_BOARD
 	default "stm32f103-minimum"         if ARCH_BOARD_STM32F103_MINIMUM
 	default "stm32f411-minimum"         if ARCH_BOARD_STM32F411_MINIMUM
 	default "stm3210e-eval"             if ARCH_BOARD_STM3210E_EVAL
+	default "stm32f103ze"               if ARCH_BOARD_STM32F103ZE
 	default "stm3220g-eval"             if ARCH_BOARD_STM3220G_EVAL
 	default "stm3240g-eval"             if ARCH_BOARD_STM3240G_EVAL
 	default "stm32f3discovery"          if ARCH_BOARD_STM32F3_DISCOVERY
@@ -4237,6 +4249,9 @@ source "boards/arm/stm32/shenzhou/Kconfig"
 endif
 if ARCH_BOARD_STM3210E_EVAL
 source "boards/arm/stm32/stm3210e-eval/Kconfig"
+endif
+if ARCH_BOARD_STM32F103ZE
+source "boards/arm/stm32/stm32f103ze/Kconfig"
 endif
 if ARCH_BOARD_STM3220G_EVAL
 source "boards/arm/stm32/stm3220g-eval/Kconfig"
