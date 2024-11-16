@@ -50,6 +50,7 @@
 
 #include "stm32.h"
 #include "stm32_i2c.h"
+#include "stm32_pwm.h"
 #include "stm3210e-eval.h"
 
 /****************************************************************************
@@ -132,10 +133,38 @@ static void stm32_i2c_register(int bus)
           _err("ERROR: Failed to register I2C%d driver: %d\n", bus, ret);
           stm32_i2cbus_uninitialize(i2c);
         }
+      syslog(LOG_INFO,"Successfully bound i2c 1 to the i2c driver\n");  
     }
 }
 #endif
 
+/****************************************************************************
+ * Name: stm32_pwm_register
+ *
+ * Description:
+ *   Register one PWM drivers.
+ *
+ ****************************************************************************/
+static void stm32_pwm_register(void)
+{
+  struct pwm_lowerhalf_s *pwm;
+  int ret;
+
+  pwm = stm32_pwminitialize(4); //初始化TIM4
+  if (pwm == NULL)
+    {
+      _err("ERROR: Failed to get PWM%d interface\n", pwm);
+    }
+  else
+    {
+      ret = pwm_register("/dev/pwm0", pwm);
+      if (ret < 0)
+        {
+          _err("ERROR: Failed to register PWM%d driver: %d\n", pwm, ret);
+        }
+      syslog(LOG_INFO,"Successfully start the pwm driver\n");  
+    }
+}
 /****************************************************************************
  * Name: stm32_i2ctool
  *
@@ -195,6 +224,9 @@ int stm32_bringup(void)
   stm32_i2ctool();
 
   /* Configure SPI-based devices */
+
+  /* Register pwm drivers */
+  stm32_pwm_register();
 
 #ifdef CONFIG_STM32_SPI1
   /* Get the SPI port */
@@ -304,7 +336,6 @@ int stm32_bringup(void)
 
 #ifdef CONFIG_INPUT_DJOYSTICK
   /* Initialize and register the joystick driver */
-
   ret = stm32_djoy_initialization();
   if (ret != OK)
     {
