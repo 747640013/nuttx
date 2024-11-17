@@ -165,6 +165,29 @@ static void stm32_pwm_register(void)
       syslog(LOG_INFO,"Successfully start the pwm driver\n");  
     }
 }
+
+/****************************************************************************
+ * Name: stm32_usb_register
+ *
+ * Description:
+ *   Register one usb drivers.
+ *
+ ****************************************************************************/
+#if defined(CONFIG_USBDEV) && defined(CONFIG_STM32_USB)
+static void stm32_usb_register(void)
+{
+  void *handle;
+  int ret;
+
+  ret = cdcacm_initialize(0,&handle); 
+  if (ret < 0)
+  {
+      _err("ERROR: Failed to register usb%d driver: %d\n", handle, ret);
+  }
+  syslog(LOG_INFO,"Successfully start the usb driver\n");  
+} 
+#endif
+
 /****************************************************************************
  * Name: stm32_i2ctool
  *
@@ -223,10 +246,15 @@ int stm32_bringup(void)
 
   stm32_i2ctool();
 
-  /* Configure SPI-based devices */
-
   /* Register pwm drivers */
+
   stm32_pwm_register();
+  
+  /* Register usb drivers */
+  #if defined(CONFIG_USBDEV) && defined(CONFIG_STM32_USB)
+  stm32_usb_register();
+  #endif
+  /* Configure SPI-based devices */
 
 #ifdef CONFIG_STM32_SPI1
   /* Get the SPI port */

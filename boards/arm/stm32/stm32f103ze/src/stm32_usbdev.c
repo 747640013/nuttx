@@ -54,13 +54,13 @@
  * Name: stm32_usbinitialize
  *
  * Description:
- *   Called to setup USB-related GPIO pins for the STM3210E-EVAL board.
+ *   Called to setup USB-related GPIO pins for the STM32F103ZE board.
  *
  ****************************************************************************/
 
 void stm32_usbinitialize(void)
 {
-  /* USB Soft Connect Pullup: PB.14 */
+  /* USB Soft Connect Pullup: PA.12 */
 
   stm32_configgpio(GPIO_USB_PULLUP);
 }

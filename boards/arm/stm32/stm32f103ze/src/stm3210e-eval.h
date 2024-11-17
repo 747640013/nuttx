@@ -123,10 +123,10 @@
 #define GPIO_LCD_BACKLIGHT (GPIO_OUTPUT|GPIO_CNF_OUTPP|GPIO_MODE_50MHz|\
                              GPIO_OUTPUT_CLEAR|GPIO_PORTA|GPIO_PIN8)
 
-/* USB Soft Connect Pullup: PB.14 */
+/* USB Soft Connect Pullup: PA.12 */
 
 #define GPIO_USB_PULLUP (GPIO_OUTPUT|GPIO_CNF_OUTOD|GPIO_MODE_50MHz|\
-                         GPIO_OUTPUT_SET|GPIO_PORTB|GPIO_PIN14)
+                         GPIO_OUTPUT_SET|GPIO_PORTA|GPIO_PIN12)
 
 /* LM-75 Temperature Sensor: PB.5 */
 
